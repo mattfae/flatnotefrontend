@@ -1,25 +1,42 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import Note from './Note'
+import { fetchNotesSuccess } from '../actions/index'
 
 
-class NoteContainer extends React.Component {
-
+class NoteContainer extends Component {
+ 
   componentDidMount() {
-    fetch('http://localhost:3000/notes')
+    fetch('http://localhost3000/notes')
     .then(resp => resp.json())
     .then(notes => {
-      console.log(notes)
+      console.log(notes)//this.props.fetchNotesSuccess(notes)
     })
   }
 
+  // renderNotes = () => {
+  //   return this.props.notes.map ( note => (
+  //     <Note
+  //       title={note.title}
+  //       content={note.content}
+  //     />
+  //   ));
+  // }
+
   render() {
     return (
-        <div className="notecontainer">
-            <p>
-              Hi
-            </p>
+        <div className="container">
+          <h1>Your Notes</h1>
+          <div className="container">
+            Hi 
+          </div>
         </div>
     )
   }
 }
 
-export default NoteContainer;
+const mapDispatchToProps = {
+  fetchNotesSuccess
+}
+
+export default connect(null, mapDispatchToProps)(NoteContainer)
